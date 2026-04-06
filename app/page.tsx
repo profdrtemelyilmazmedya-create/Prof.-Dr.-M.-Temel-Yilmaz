@@ -13,7 +13,8 @@ const siteData = {
     phone: "(0212) 296 91 59",
     whatsapp: "+90 533 220 20 10",
     address: "Teşvikiye, Hakkı Yeten Cd. No:17, Kat: 7, 34365 Şişli/İstanbul",
-    mapsIframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.6106634701257!2d28.99505877651034!3d41.03332191787165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab7a1c3e3a4fb%3A0xc6e4b8a2e1d09e5a!2zQcWfw6dpb8SfbHUgUGxhemE!5e0!3m2!1str!2str!4v1712134567890!5m2!1str!2str"
+    // Harita doğrudan Aşçıoğlu Plaza'yı işaret ediyor
+    mapsIframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3009.686524316688!2d28.99540021541484!3d41.05389617929657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab7080eaec217%3A0xcfa0753086eb293a!2sA%C5%9Fc%C4%B1o%C4%9Flu%20Plaza!5e0!3m2!1str!2str!4v1680000000000!5m2!1str!2str"
   },
   menu: [
     { 
@@ -74,7 +75,6 @@ const siteData = {
       imageUrl: "https://images.unsplash.com/photo-1576091160550-2173ff9e9e9c?q=80&w=800"
     }
   ],
-  // Örnek YouTube Videoları Şablonu
   youtube: [
     { id: 1, title: "Diyabet Tedavisinde Yeni Yaklaşımlar", videoId: "Jx0Ew7GvLdw" },
     { id: 2, title: "Metabolizma ve Sağlıklı Yaşam", videoId: "T5BkPFfnI_M" }
@@ -83,7 +83,7 @@ const siteData = {
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Mobil menü durumu
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -100,12 +100,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex items-center justify-between xl:flex-col xl:gap-4">
             
-            {/* Logo/İsim */}
             <div className="font-bold text-lg md:text-xl text-blue-900 leading-tight flex-shrink-0 z-50">
               PROF. DR.<br/>M. TEMEL YILMAZ
             </div>
 
-            {/* Mobil Hamburger Butonu */}
             <button 
               className="xl:hidden p-2 text-gray-600 focus:outline-none z-50"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -119,7 +117,6 @@ export default function Home() {
               </svg>
             </button>
             
-            {/* Masaüstü Menü İkonları */}
             <div className="hidden xl:flex flex-wrap justify-center gap-x-6 gap-y-2">
               {siteData.menu.map((item) => (
                 <a 
@@ -134,14 +131,13 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Açılır Mobil Menü */}
           <div className={`xl:hidden transition-all duration-300 ease-in-out overflow-hidden ${isMobileMenuOpen ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"}`}>
             <div className="flex flex-col gap-4 pb-4 border-t pt-4">
               {siteData.menu.map((item) => (
                 <a 
                   key={item.name} 
                   href={item.link} 
-                  onClick={() => setIsMobileMenuOpen(false)} // Tıklanınca menüyü kapat
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className="flex items-center text-base font-semibold text-gray-800 hover:text-blue-600 px-2"
                 >
                   <span className="text-blue-600 mr-3">{item.icon}</span>
@@ -178,7 +174,7 @@ export default function Home() {
         ))}
       </section>
 
-      {/* --- AKADEMİK KARİYER (Örnek Şablon) --- */}
+      {/* --- AKADEMİK KARİYER --- */}
       <section id="kariyer" className="py-20 md:py-24 bg-white">
         <div className="max-w-5xl mx-auto px-4">
           <div className="flex items-center gap-4 mb-12">
@@ -196,7 +192,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- ÖDÜLLER (Örnek Şablon) --- */}
+      {/* --- ÖDÜLLER --- */}
       <section id="oduller" className="py-20 md:py-24 bg-gray-50">
         <div className="max-w-5xl mx-auto px-4">
           <div className="flex items-center gap-4 mb-12">
@@ -204,7 +200,6 @@ export default function Home() {
             <h2 className="text-3xl font-bold text-gray-800">Ödüller ve Başarılar</h2>
           </div>
           <div className="grid sm:grid-cols-2 gap-6">
-            {/* Örnek Ödül Kartı */}
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex gap-4 items-start">
               <div className="bg-yellow-100 text-yellow-600 p-3 rounded-full flex-shrink-0">
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.583l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.788l1.599.799L9 4.323V3a1 1 0 011-1z" clipRule="evenodd" /></svg>
@@ -228,7 +223,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- BİLİMSEL YAYINLAR (Örnek Şablon) --- */}
+      {/* --- BİLİMSEL YAYINLAR --- */}
       <section id="yayinlar" className="py-20 md:py-24 bg-white">
         <div className="max-w-5xl mx-auto px-4">
           <div className="flex items-center gap-4 mb-12">
@@ -277,7 +272,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- YOUTUBE VİDEOLARI (Örnek Şablon) --- */}
+      {/* --- YOUTUBE VİDEOLARI --- */}
       <section id="youtube" className="py-20 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center gap-4 mb-12">
@@ -287,7 +282,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8">
             {siteData.youtube.map((video) => (
               <div key={video.id} className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50">
-                <div className="relative pt-[56.25%]"> {/* 16:9 Aspect Ratio */}
+                <div className="relative pt-[56.25%]">
                   <iframe 
                     className="absolute top-0 left-0 w-full h-full"
                     src={`https://www.youtube.com/embed/${video.videoId}`} 
@@ -305,7 +300,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- LONGEVITY (Örnek Şablon) --- */}
+      {/* --- LONGEVITY --- */}
       <section id="longevity" className="py-20 md:py-24 bg-blue-50">
         <div className="max-w-5xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">Longevity ve Sağlıklı Yaşlanma</h2>
