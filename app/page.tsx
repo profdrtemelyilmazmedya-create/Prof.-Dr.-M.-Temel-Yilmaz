@@ -6,14 +6,9 @@ import { useState, useEffect } from "react";
 const siteData = {
   personal: {
     name: "Prof. Dr. M. Temel Yılmaz",
-    titles: [
-      "Endokrinoloji ve Metabolizma Hastalıkları Uzmanı",
-      "İç Hastalıkları Uzmanı"
-    ],
     phone: "(0212) 296 91 59",
     whatsapp: "+90 533 220 20 10",
     address: "Teşvikiye, Hakkı Yeten Cd. No:17, Kat: 7, 34365 Şişli/İstanbul",
-    // REVIZE: Yeni harita bağlantısı eklendi
     mapsIframe: "https://maps.app.goo.gl/NXc4HSbpgu1Cqoya8"
   },
   menu: [
@@ -53,11 +48,32 @@ const siteData = {
       icon: <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
     }
   ],
+  // REVIZE: Slaytlar için özel metinler eklendi
   heroSlides: [
-    { id: 1, image: "/slayt1.jpg" },
-    { id: 2, image: "/slayt2.jpg" },
-    { id: 3, image: "/slayt3.jpg" },
-    { id: 4, image: "/slayt4.jpg" }
+    { 
+      id: 1, 
+      image: "/slayt1.jpg", 
+      text1: "Endokrinoloji ve Metabolizma Hastalıkları Uzmanı",
+      text2: "İç Hastalıkları Uzmanı" 
+    },
+    { 
+      id: 2, 
+      image: "/slayt2.jpg", 
+      text1: "Bilimsel Mükemmeliyet",
+      text2: "Uluslararası Düzeyde Kanıta Dayalı Tıp Yaklaşımı" 
+    },
+    { 
+      id: 3, 
+      image: "/slayt3.jpg", 
+      text1: "Diyabet ve Obezitede",
+      text2: "Bütüncül ve Kişiye Özel Tedavi Protokolleri" 
+    },
+    { 
+      id: 4, 
+      image: "/slayt4.jpg", 
+      text1: "Longevity (Sağlıklı Yaşlanma)",
+      text2: "Hücresel Düzeyde Metabolizmayı Destekleyen Çözümler" 
+    }
   ],
   press: [
     {
@@ -162,16 +178,29 @@ export default function Home() {
                 {siteData.personal.name}
               </h1>
               
-              <div className="space-y-2 bg-black/30 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-3xl border border-white/10 shadow-2xl max-w-sm sm:max-w-xl lg:max-w-2xl w-full">
-                {siteData.personal.titles.map((title, i) => (
-                  <p key={i} className="text-lg sm:text-xl md:text-2xl font-medium drop-shadow-md leading-snug">
-                    {title}
+              {/* REVIZE: Slayta özel metinler ekrandaki cam efekti kutusunda gösteriliyor */}
+              <div className="space-y-2 bg-black/30 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-3xl border border-white/10 shadow-2xl max-w-sm sm:max-w-xl lg:max-w-3xl w-full transition-all duration-500">
+                  <p className="text-lg sm:text-xl md:text-2xl font-bold drop-shadow-md text-blue-100">
+                    {slide.text1}
                   </p>
-                ))}
+                  <p className="text-base sm:text-lg md:text-xl font-medium drop-shadow-md leading-snug">
+                    {slide.text2}
+                  </p>
               </div>
             </div>
           </div>
         ))}
+
+        {/* REVIZE: Kullanıcı hangi slaytta olduğunu görsün diye küçük noktalar eklendi */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-3">
+          {siteData.heroSlides.map((_, i) => (
+            <button 
+              key={i} 
+              onClick={() => setCurrentSlide(i)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${i === currentSlide ? "bg-white w-8" : "bg-white/40 hover:bg-white/60"}`} 
+            />
+          ))}
+        </div>
       </section>
 
       {/* --- AKADEMİK KARİYER --- */}
