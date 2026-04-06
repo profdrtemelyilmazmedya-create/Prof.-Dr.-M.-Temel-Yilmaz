@@ -9,7 +9,7 @@ const siteData = {
     phone: "(0212) 296 91 59",
     whatsapp: "+90 533 220 20 10",
     address: "Teşvikiye, Hakkı Yeten Cd. No:17, Kat: 7, 34365 Şişli/İstanbul",
-    mapsIframe: "https://maps.app.goo.gl/NXc4HSbpgu1Cqoya8"
+    mapsIframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.5!2d28.995!3d41.055!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab7011e7eb363%3A0xe979be95eb787ec!2zAsc3x_R2xHUgUGxhemE!5e0!3m2!1str!2str!4v1712390000000!5m2!1str!2str"
   },
   menu: [
     { 
@@ -48,31 +48,27 @@ const siteData = {
       icon: <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
     }
   ],
-  // REVIZE: Slaytlar için özel metinler eklendi
+  // REVIZE: Sizin verdiğiniz iki unvan dönüşümlü olarak eklendi
   heroSlides: [
     { 
       id: 1, 
       image: "/slayt1.jpg", 
-      text1: "Endokrinoloji ve Metabolizma Hastalıkları Uzmanı",
-      text2: "İç Hastalıkları Uzmanı" 
+      title: "Endokrinoloji ve Metabolizma Hastalıkları Uzmanı"
     },
     { 
       id: 2, 
       image: "/slayt2.jpg", 
-      text1: "Bilimsel Mükemmeliyet",
-      text2: "Uluslararası Düzeyde Kanıta Dayalı Tıp Yaklaşımı" 
+      title: "İç Hastalıkları Uzmanı"
     },
     { 
       id: 3, 
       image: "/slayt3.jpg", 
-      text1: "Diyabet ve Obezitede",
-      text2: "Bütüncül ve Kişiye Özel Tedavi Protokolleri" 
+      title: "Endokrinoloji ve Metabolizma Hastalıkları Uzmanı"
     },
     { 
       id: 4, 
       image: "/slayt4.jpg", 
-      text1: "Longevity (Sağlıklı Yaşlanma)",
-      text2: "Hücresel Düzeyde Metabolizmayı Destekleyen Çözümler" 
+      title: "İç Hastalıkları Uzmanı"
     }
   ],
   press: [
@@ -178,20 +174,16 @@ export default function Home() {
                 {siteData.personal.name}
               </h1>
               
-              {/* REVIZE: Slayta özel metinler ekrandaki cam efekti kutusunda gösteriliyor */}
-              <div className="space-y-2 bg-black/30 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-3xl border border-white/10 shadow-2xl max-w-sm sm:max-w-xl lg:max-w-3xl w-full transition-all duration-500">
-                  <p className="text-lg sm:text-xl md:text-2xl font-bold drop-shadow-md text-blue-100">
-                    {slide.text1}
-                  </p>
-                  <p className="text-base sm:text-lg md:text-xl font-medium drop-shadow-md leading-snug">
-                    {slide.text2}
+              {/* REVIZE: Sadece o anki slaytın unvanı yazacak */}
+              <div className="bg-black/30 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-3xl border border-white/10 shadow-2xl max-w-sm sm:max-w-xl lg:max-w-3xl w-full transition-all duration-500">
+                  <p className="text-lg sm:text-xl md:text-2xl font-bold drop-shadow-md text-blue-50">
+                    {slide.title}
                   </p>
               </div>
             </div>
           </div>
         ))}
 
-        {/* REVIZE: Kullanıcı hangi slaytta olduğunu görsün diye küçük noktalar eklendi */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-3">
           {siteData.heroSlides.map((_, i) => (
             <button 
