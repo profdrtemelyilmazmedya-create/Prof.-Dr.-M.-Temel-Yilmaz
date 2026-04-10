@@ -6,6 +6,10 @@ import { useState, useEffect } from "react";
 const siteData = {
   personal: {
     name: "Prof. Dr. M. Temel Yılmaz",
+    titles: [
+      "Endokrinoloji ve Metabolizma Hastalıkları Uzmanı",
+      "İç Hastalıkları Uzmanı"
+    ],
     phone: "(0212) 296 91 59",
     whatsapp: "+90 533 220 20 10",
     address: "Teşvikiye, Hakkı Yeten Cd. No:17, Kat: 7, 34365 Şişli/İstanbul",
@@ -48,27 +52,26 @@ const siteData = {
       icon: <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
     }
   ],
-  // REVIZE: Sizin verdiğiniz iki unvan dönüşümlü olarak eklendi
   heroSlides: [
     { 
       id: 1, 
-      image: "/slayt1.jpg", 
-      title: "Endokrinoloji ve Metabolizma Hastalıkları Uzmanı"
+      image: "/giris.jpg", // Yeni fotoğraf bu isimle public klasöründe olmalı
+      text1: "Endokrinoloji ve Metabolizma Hastalıkları Uzmanı"
     },
     { 
       id: 2, 
       image: "/slayt2.jpg", 
-      title: "İç Hastalıkları Uzmanı"
+      text1: "İç Hastalıkları Uzmanı"
     },
     { 
       id: 3, 
       image: "/slayt3.jpg", 
-      title: "Endokrinoloji ve Metabolizma Hastalıkları Uzmanı"
+      text1: "Endokrinoloji ve Metabolizma Hastalıkları Uzmanı"
     },
     { 
       id: 4, 
       image: "/slayt4.jpg", 
-      title: "İç Hastalıkları Uzmanı"
+      text1: "İç Hastalıkları Uzmanı"
     }
   ],
   press: [
@@ -88,8 +91,22 @@ const siteData = {
     }
   ],
   youtube: [
-    { id: 1, title: "Diyabet Tedavisinde Yeni Yaklaşımlar", videoId: "Jx0Ew7GvLdw" },
-    { id: 2, title: "Metabolizma ve Sağlıklı Yaşam", videoId: "T5BkPFfnI_M" }
+    { id: 1, title: "Diyabet ve Tedavisindeki Son Gelişmeler", videoId: "aXqOdeTjIkw", source: "Sağlığım İçin Herşey" },
+    { id: 2, title: "Diyabet Teknolojilerinde Sensör Seçimi", videoId: "i2lICTizkYg", source: "Ok But First Insulin" },
+    { id: 3, title: "Türkiye'de 12 milyon diyabetli var!", videoId: "T5BkPFfnI_M", source: "12'de Sağlık" },
+    { id: 4, title: "İnsülinin keşfi kadar büyük bir başarı", videoId: "Jx0Ew7GvLdw", source: "HABERTÜRK" },
+    { id: 5, title: "300'den fazla akademisyenin 10 yıllık çalışması", videoId: "h9iWfzpA4_Y", source: "HABERTÜRK TV" },
+    { id: 6, title: "Brittle (Oynak) Diyabet Nedir?", videoId: "k7vnLkbw0KM", source: "Acıbadem Sağlık Grubu" },
+    { id: 7, title: "Gün Ortası | Prof. Dr. Temel Yılmaz", videoId: "FWHMdHKLTJ0", source: "EKOTÜRK TV" },
+    { id: 8, title: "14 Kasım Diyabet Günü", videoId: "l3oNE0JUtqc", source: "HABERTÜRK TV" },
+    { id: 9, title: "Expo Channel - Profesyoneller", videoId: "PDPLWz_miGE", source: "Profesyoneller" },
+    { id: 10, title: "Türk Diyabet Vakfı Başkanı CNN Türk'e Konuştu", videoId: "awJ8OntgrdY", source: "Hadi 7'le" },
+    { id: 11, title: "Türk Diyabet Vakfı Başkanı Kanal D'ye Konuştu", videoId: "4otgLxrttOE", source: "Hadi 7'le" },
+    { id: 12, title: "Gülay Üserbay ile Sağlıklı Yaşam", videoId: "x2jOgpITT8Y", source: "KRT TV" },
+    { id: 13, title: "Diyabet Hastalığında Doğru Bilinen Yanlışlar", videoId: "jZOW4e6Rgos", source: "Sağlığım İçin Herşey" },
+    { id: 14, title: "\"50 diyabetli kadın\" projesi", videoId: "9vOCiYidITA", source: "Habertürk" },
+    { id: 15, title: "Derya Baykal ile Hayata Dair | 149. Bölüm", videoId: "kGubtVnLaAI", source: "TYT Türk" },
+    { id: 16, title: "TRT Türkçe - Ayn el Alem / Röportaj", videoId: "VZ8zdmks7Jw", source: "Yusuf Sami Kamadan" }
   ]
 };
 
@@ -169,17 +186,21 @@ export default function Home() {
             
             <div className="absolute inset-0 bg-black/40 z-10" />
 
-            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-white text-center px-4">
+            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-white text-center px-4 relative">
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] leading-tight mt-10">
                 {siteData.personal.name}
               </h1>
               
-              {/* REVIZE: Sadece o anki slaytın unvanı yazacak */}
-              <div className="bg-black/30 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-3xl border border-white/10 shadow-2xl max-w-sm sm:max-w-xl lg:max-w-3xl w-full transition-all duration-500">
-                  <p className="text-lg sm:text-xl md:text-2xl font-bold drop-shadow-md text-blue-50">
-                    {slide.title}
+              <div className="space-y-2 bg-black/30 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-3xl border border-white/10 shadow-2xl max-w-sm sm:max-w-xl lg:max-w-3xl w-full transition-all duration-500">
+                  <p className="text-lg sm:text-xl md:text-2xl font-bold drop-shadow-md text-blue-100 leading-tight">
+                    {slide.text1}
                   </p>
               </div>
+
+              {/* REVIZE: Sağ alt watermark imzası eklendi */}
+              <p className="absolute bottom-6 right-6 z-30 text-xs font-medium text-white/70 tracking-widest uppercase border border-white/20 px-3 py-1 rounded-full backdrop-blur-sm transition-all duration-300">
+                Arateus Sağlık
+              </p>
             </div>
           </div>
         ))}
@@ -286,16 +307,18 @@ export default function Home() {
       </section>
 
       {/* --- YOUTUBE --- */}
-      <section id="youtube" className="py-20 md:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center gap-4 mb-12">
+      <section id="youtube" className="py-20 md:py-24 bg-white relative">
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="flex items-center gap-4 mb-16">
             <div className="w-12 h-1 bg-red-600 rounded-full"></div>
             <h2 className="text-3xl font-bold text-gray-800">YouTube Videoları</h2>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
+          
+          {/* REVIZE: 16 video için daha şık bir ızgara yapısı (lg:3 columns, xl:4 columns) */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10">
             {siteData.youtube.map((video) => (
-              <div key={video.id} className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-gray-50">
-                <div className="relative pt-[56.25%]">
+              <div key={video.id} className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 bg-white group flex flex-col h-full">
+                <div className="relative pt-[56.25%] overflow-hidden flex-shrink-0">
                   <iframe 
                     className="absolute top-0 left-0 w-full h-full"
                     src={`https://www.youtube.com/embed/${video.videoId}`} 
@@ -304,8 +327,13 @@ export default function Home() {
                     allowFullScreen
                   ></iframe>
                 </div>
-                <div className="p-4 bg-white">
-                  <h3 className="font-bold text-gray-800 line-clamp-1">{video.title}</h3>
+                <div className="p-6 flex-grow flex flex-col">
+                  <p className="text-xs font-bold text-red-600 uppercase tracking-widest mb-2 flex-shrink-0">
+                    {video.source}
+                  </p>
+                  <h3 className="font-bold text-gray-800 text-sm leading-snug group-hover:text-blue-700 transition-colors line-clamp-3 flex-grow">
+                    {video.title}
+                  </h3>
                 </div>
               </div>
             ))}
