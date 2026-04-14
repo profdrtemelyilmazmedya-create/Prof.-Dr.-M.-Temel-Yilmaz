@@ -2,6 +2,15 @@
 
 import { useState, useEffect } from "react";
 
+// --- TYPESCRIPT TANIMLAMASI (Vercel Hatasını Çözen Kısım) ---
+type CategoryType = {
+  id: string;
+  title: string;
+  items?: string[];
+  list?: string[];
+  customContent?: any;
+};
+
 // --- VERİ DEPOSU ---
 const siteData = {
   personal: {
@@ -159,7 +168,7 @@ const siteData = {
         "Halk sağlığı ve diyabet epidemiyolojisi"
       ]
     }
-  ],
+  ] as CategoryType[], // TypeScript'e tip bildirimi eklendi
 
   press: [
     { id: 1, title: "Yılın Bilim Adamı Ödülü Prof. Dr. M. Temel Yılmaz'a Verildi", source: "Medimagazin", link: "https://medimagazin.com.tr/hekim/yilin-bilim-adami-odulu-prof-dr-m-temel-yilmaza-verildi-67689", imageUrl: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=800" },
@@ -191,7 +200,6 @@ export default function Home() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   
-  // null = Ana Sayfa, string = İlgili Alt Sayfa
   const [activePage, setActivePage] = useState<string | null>(null);
 
   useEffect(() => {
@@ -235,7 +243,6 @@ export default function Home() {
           {/* Masaüstü Menü */}
           <div className="hidden lg:flex items-center gap-8">
             
-            {/* DROPDOWN: Hakkında */}
             <div 
               className="relative group h-24 flex items-center"
               onMouseEnter={() => setIsDropdownOpen(true)}
@@ -246,7 +253,6 @@ export default function Home() {
                 <svg className={`w-4 h-4 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" /></svg>
               </button>
 
-              {/* Açılır Kutu (Beyaz, hafif gölge, yuvarlak köşe) */}
               <div className={`absolute top-[80px] left-0 w-80 bg-white border border-gray-100 shadow-[0_15px_40px_rgba(0,0,0,0.08)] rounded-[10px] py-3 transition-all duration-300 ${isDropdownOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible translate-y-2'}`}>
                 {siteData.cvCategories.map((cat) => (
                   <button 
@@ -260,7 +266,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Diğer Menüler */}
             <button onClick={() => navigateTo(null, '#basin')} className="text-[15px] font-medium text-gray-500 hover:text-[#111] transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:h-[1px] after:bg-[#111] after:w-0 hover:after:w-full after:transition-all after:duration-300">
               Basında Biz
             </button>
@@ -280,7 +285,7 @@ export default function Home() {
             </button>
           </div>
 
-          {/* Mobil Hamburger İkonu */}
+          {/* Mobil Hamburger */}
           <button className="lg:hidden p-2 text-[#111]" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isMobileMenuOpen ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" /> : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 8h16M4 16h16" />}
@@ -288,7 +293,7 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Mobil Menü İçeriği */}
+        {/* Mobil Menü */}
         <div className={`lg:hidden overflow-hidden bg-white transition-all duration-300 ${isMobileMenuOpen ? "max-h-[80vh] border-t border-gray-100" : "max-h-0"}`}>
           <div className="flex flex-col p-6 space-y-6 overflow-y-auto">
             <div className="space-y-4">
@@ -315,12 +320,10 @@ export default function Home() {
       {activePage === null && (
         <div className="animate-fade-in">
           
-          {/* HERO */}
           <section className="relative h-[100vh] lg:h-[90vh] bg-black pt-24 flex items-center justify-center overflow-hidden">
             {siteData.heroSlides.map((slide, index) => (
               <div key={slide.id} className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? "opacity-100" : "opacity-0"}`}>
                 <img src={slide.image} className="w-full h-full object-cover object-top opacity-80" alt="" />
-                {/* Siyah Gradiyent Maske */}
                 <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-10" />
                 
                 <div className="absolute inset-0 z-20 flex flex-col items-center justify-center px-4 text-center">
@@ -398,15 +401,12 @@ export default function Home() {
             <p className="text-gray-500 font-light text-lg tracking-wide">Bu bölüm çok yakında aktif olacaktır.</p>
           </section>
 
-          {/* İLETİŞİM (MİNİMAL FORM) */}
+          {/* İLETİŞİM */}
           <section id="iletisim" className="py-32 bg-white">
             <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-20">
-              
-              {/* İletişim Bilgileri */}
               <div>
                 <h2 className="text-4xl font-bold text-[#111] tracking-tight mb-4">İletişim</h2>
                 <div className="w-12 h-[1px] bg-black mb-12"></div>
-                
                 <div className="space-y-10">
                   <div>
                     <p className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-2">Adres</p>
@@ -421,8 +421,6 @@ export default function Home() {
                   </div>
                 </div>
               </div>
-
-              {/* Minimal Form */}
               <div>
                 <form className="flex flex-col gap-8">
                   <input type="text" placeholder="Ad Soyad" className="w-full border-b border-gray-300 py-3 text-[#111] placeholder-gray-400 outline-none focus:border-black transition-colors bg-transparent font-light" />
@@ -444,8 +442,6 @@ export default function Home() {
       {activePage !== null && (
         <div className="animate-fade-in min-h-screen bg-white pt-40 pb-32">
           <div className="max-w-4xl mx-auto px-6">
-            
-            {/* Minimal Geri Butonu */}
             <button onClick={() => navigateTo(null)} className="group flex items-center gap-2 text-gray-400 hover:text-[#111] transition-colors text-sm font-medium uppercase tracking-widest mb-16">
               <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
               Ana Sayfa
@@ -457,20 +453,16 @@ export default function Home() {
                 <div className="w-16 h-[2px] bg-[#111] mb-16"></div>
 
                 <div className="prose prose-lg max-w-none">
-                  
-                  {/* Kısa, net, boşluklu liste formatı */}
                   {(category.items || category.list) && (
                     <ul className="space-y-8 list-none pl-0">
-                      {(category.items || category.list || []).map((item, i) => (
+                      {(category.items || category.list || []).map((item: string, i: number) => (
                         <li key={i} className="flex items-start gap-5 text-[#333] text-lg font-light leading-relaxed">
-                          {/* İsviçre tarzı minimal madde işareti */}
                           <span className="mt-3 w-1.5 h-1.5 bg-[#111] shrink-0"></span> 
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
                   )}
-
                   {category.customContent && category.customContent}
                 </div>
               </div>
